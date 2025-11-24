@@ -1,0 +1,4 @@
+if (player.collider.intersects(chest.collider)) {
+    player.position = previousPosition;
+    player.updateCollider();
+}
