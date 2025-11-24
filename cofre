@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# --- Configuración ---
+# Nombre del nuevo archivo que será tu "cofre"
+NEW_FILE_NAME="cofre.txt"
+# Mensaje dentro del cofre
+CHEST_CONTENT="¡Has encontrado el cofre del tesoro! Contiene secretos de Chrono-Gardener."
+# Mensaje para el commit
+COMMIT_MESSAGE="feat: Agrega el cofre del tes tesoro al repositorio"
+# Rama a la que deseas subir los cambios (comúnmente main o master)
+BRANCH_NAME="main" 
+
+# --- Script de automatización ---
+
+echo "Iniciando proceso para agregar '$NEW_FILE_NAME' a GitHub..."
+
+# 1. Crear el nuevo archivo (el "cofre")
+echo "$CHEST_CONTENT" > "$NEW_FILE_NAME"
+if [ $? -eq 0 ]; then
+  echo "✅ Archivo '$NEW_FILE_NAME' creado con éxito."
+else
+  echo "❌ Error al crear el archivo '$NEW_FILE_NAME'. Abortando."
+  exit 1
+fi
+
+# 2. Agregar el archivo al área de staging
+git add "$NEW_FILE_NAME"
+if [ $? -eq 0 ]; then
+  echo "✅ Archivo '$NEW_FILE_NAME' agregado al staging."
+else
+  echo "❌ Error al agregar '$NEW_FILE_NAME' al staging. Abortando."
+  exit 1
+fi
+
+# 3. Confirmar los cambios
+git commit -m "$COMMIT_MESSAGE"
+if [ $? -eq 0 ]; then
+  echo "✅ Cambios confirmados con el mensaje: '$COMMIT_MESSAGE'."
+else
+  echo "❌ Error al confirmar los cambios. ¿Quizás no hay nada que confirmar o ya está todo confirmado? Abortando."
+  exit 1
+fi
+
+# 4. Subir los cambios a GitHub
+echo "Subiendo los cambios a la rama '$BRANCH_NAME' de GitHub..."
+git push origin "$BRANCH_NAME"
+if [ $? -eq 0 ]; then
+  echo " ¡Éxito! '$NEW_FILE_NAME' ha sido subido a GitHub."
+else
+  echo "❌ Error al subir los cambios a GitHub. Por favor, revisa tu conexión o credenciales."
+  echo "Intenta 'git push' manualmente para ver los errores específicos."
+  exit 1
+fi
+
+echo "Proceso completado."
