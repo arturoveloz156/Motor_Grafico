@@ -1,0 +1,5 @@
+if (player.collider.intersects(chest.collider)) {
+    if (input.isKeyPressed(KEY_E)) {
+        chestOpen = true;
+    }
+}
