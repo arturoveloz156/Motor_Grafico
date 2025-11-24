@@ -1,0 +1,5 @@
+GameObject chest;
+chest.position = glm::vec3(5.0f, 0.0f, 3.0f);
+chest.scale = glm::vec3(1.0f);
+chest.model = LoadModel("models/chest.obj");
+chest.updateCollider();
