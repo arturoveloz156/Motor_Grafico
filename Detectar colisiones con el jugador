@@ -1,0 +1,3 @@
+if (player.collider.intersects(chest.collider)) {
+    std::cout << "Colisión con el cofre!" << std::endl;
+}
